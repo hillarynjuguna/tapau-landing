@@ -13,38 +13,80 @@ const EXAMPLE_MESSAGES = [
   { text: 'what time u close today', lang: 'English' },
 ]
 
-const OPENROUTER_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || ''
+// ── AI Provider Cascade (mirrors hillary-njuguna-intelligence-site pattern) ──
+const SYSTEM_PROMPT = `You are a multilingual intent classifier for Malaysian F&B WhatsApp messages. Analyze the customer message and respond with ONLY valid JSON (no markdown, no backticks):
+{"intent":"<one of: availability_check, order_placement, pricing_inquiry, operating_hours, menu_request, greeting, reservation, complaint, other>","item":"<specific food item mentioned or null>","language_register":"<Manglish|Malay|Mandarin|Tamil|English|Mixed>","suggested_reply":"<natural reply in the SAME language register, friendly F&B style, 1-2 sentences with emoji>","confidence":<0.0-1.0>}`
+
+const PROVIDERS = [
+  {
+    name: 'OpenRouter',
+    url: 'https://openrouter.ai/api/v1/chat/completions',
+    apiKey: import.meta.env.VITE_OPENROUTER_API_KEY || '',
+    models: [
+      'mistralai/mistral-small-3.1-24b-instruct:free',
+      'google/gemini-flash-1.5-exp:free',
+      'meta-llama/llama-3.1-8b-instruct:free',
+    ],
+    headers: (key) => ({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${key}`,
+      'HTTP-Referer': 'https://tapau-landing.vercel.app',
+      'X-Title': 'Tapau AI Demo',
+    }),
+  },
+  {
+    name: 'Mistral Direct',
+    url: 'https://api.mistral.ai/v1/chat/completions',
+    apiKey: import.meta.env.VITE_MISTRAL_API_KEY || '',
+    models: ['mistral-small-latest'],
+    headers: (key) => ({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${key}`,
+    }),
+  },
+]
 
 async function classifyWithAI(message) {
-  try {
-    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${OPENROUTER_KEY}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://tapau.my',
-        'X-Title': 'Tapau AI Demo',
-      },
-      body: JSON.stringify({
-        model: 'mistralai/mistral-small-3.1-24b-instruct-2503:free',
-        messages: [
-          {
-            role: 'system',
-            content: `You are a multilingual intent classifier for Malaysian F&B WhatsApp messages. Analyze the customer message and respond with ONLY valid JSON (no markdown, no backticks):
-{"intent":"<one of: availability_check, order_placement, pricing_inquiry, operating_hours, menu_request, greeting, reservation, complaint, other>","item":"<specific food item mentioned or null>","language_register":"<Manglish|Malay|Mandarin|Tamil|English|Mixed>","suggested_reply":"<natural reply in the SAME language register, friendly F&B style, 1-2 sentences with emoji>","confidence":<0.0-1.0>}`
-          },
-          { role: 'user', content: message }
-        ],
-        temperature: 0.3,
-        max_tokens: 200,
-      }),
-    })
-    const data = await res.json()
-    const content = data.choices?.[0]?.message?.content || ''
-    return JSON.parse(content)
-  } catch (e) {
-    return fallbackClassify(message)
+  for (const provider of PROVIDERS) {
+    if (!provider.apiKey) continue
+
+    for (const model of provider.models) {
+      try {
+        const res = await fetch(provider.url, {
+          method: 'POST',
+          headers: provider.headers(provider.apiKey),
+          body: JSON.stringify({
+            model,
+            messages: [
+              { role: 'system', content: SYSTEM_PROMPT },
+              { role: 'user', content: message },
+            ],
+            temperature: 0.3,
+            max_tokens: 200,
+          }),
+        })
+
+        const data = await res.json()
+
+        if (!res.ok || data.error) {
+          // Skip transient errors → try next model/provider
+          const errCode = data.error?.code ?? res.status
+          if ([429, 408, 503].includes(errCode)) continue
+          continue
+        }
+
+        const content = data.choices?.[0]?.message?.content || ''
+        const parsed = JSON.parse(content)
+        // Tag which provider actually responded (visible in JSON panel)
+        return { ...parsed, _provider: `${provider.name} / ${model}` }
+      } catch {
+        // Network error or JSON parse fail → try next
+        continue
+      }
+    }
   }
+  // All providers exhausted — local heuristic fallback
+  return { ...fallbackClassify(message), _provider: 'Local Heuristic' }
 }
 
 function fallbackClassify(msg) {
