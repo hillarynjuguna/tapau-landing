@@ -300,9 +300,9 @@ function DashboardDemo() {
 
 /* --- Revenue Demo --- */
 function RevenueDemo() {
-  const [clients, setClients] = useState(10)
-  const [avgOrders, setAvgOrders] = useState(30)
-  const [retention, setRetention] = useState(30)
+  const [clients, setClients] = useState(50)
+  const [avgOrders, setAvgOrders] = useState(40)
+  const [retention, setRetention] = useState(35)
 
   const setupRevPerClient = 225  // avg of RM150-300
   const monthlyRevPerClient = 115 // avg of RM80-150

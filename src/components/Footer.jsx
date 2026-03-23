@@ -7,11 +7,38 @@ export default function Footer() {
   const [submitted, setSubmitted] = useState(false)
   const [ref, isInView] = useInView(0.1)
 
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (email.trim()) {
+    if (!email.trim()) return
+    setLoading(true)
+    try {
+      // Web3Forms — free, no backend needed. Replace access_key with yours from web3forms.com
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_KEY || 'YOUR_WEB3FORMS_KEY',
+          subject: '🥡 New Tapau Waitlist Signup',
+          email,
+          message: `New waitlist signup from tapau landing page: ${email}`,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setSubmitted(true)
+      } else {
+        // fallback: open mailto
+        window.location.href = `mailto:hello@agentsea.co?subject=Tapau Waitlist&body=Add me to the waitlist: ${email}`
+        setSubmitted(true)
+      }
+    } catch {
+      // offline fallback
+      window.location.href = `mailto:hello@agentsea.co?subject=Tapau Waitlist&body=Add me to the waitlist: ${email}`
       setSubmitted(true)
-      // In production, wire to Resend or your email service
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -40,8 +67,8 @@ export default function Footer() {
                 onChange={e => setEmail(e.target.value)}
                 required
               />
-              <button type="submit" className="btn btn-primary">
-                Join Waitlist →
+              <button type="submit" className="btn btn-primary" disabled={loading}>
+                {loading ? 'Sending…' : 'Join Waitlist →'}
               </button>
             </form>
           ) : (
