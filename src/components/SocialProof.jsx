@@ -29,10 +29,10 @@ export default function SocialProof() {
   const [ref, isInView] = useInView(0.15)
 
   const metrics = [
-    { value: 847, suffix: '+', label: 'Contacts captured', icon: '📱' },
-    { value: 23, suffix: '', label: 'Broadcasts sent', icon: '📢' },
-    { value: 27, suffix: '%', label: 'Avg response rate', icon: '💬' },
-    { value: 48, suffix: 'hrs', label: 'Avg setup time', icon: '⚡' },
+    { value: 847, suffix: '+', label: 'Contacts captured', icon: 'C' },
+    { value: 23, suffix: '', label: 'Broadcasts sent', icon: 'B' },
+    { value: 27, suffix: '%', label: 'Avg response rate', icon: 'R' },
+    { value: 48, suffix: 'hrs', label: 'Avg setup time', icon: 'S' },
   ]
 
   return (
@@ -46,9 +46,7 @@ export default function SocialProof() {
         >
           <span className="label">Early Results</span>
           <h2>Numbers that speak</h2>
-          <p>
-            Early pilot data from Malaysian F&B businesses using the Tapau system.
-          </p>
+          <p>Early pilot data from Malaysian F&B businesses using the Quickin system.</p>
         </motion.div>
 
         <div className="metrics-grid">
@@ -69,22 +67,19 @@ export default function SocialProof() {
           ))}
         </div>
 
-        {/* Testimonial */}
         <motion.div
           className="testimonial glass-card"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <div className="testimonial-badge">Beta Program 🚀</div>
+          <div className="testimonial-badge">Beta Program</div>
           <blockquote className="testimonial-quote">
-            "Before Tapau, I was getting thousands of TikTok views but couldn't 
-            keep track of a single customer. Now I have a list of 200+ people 
-            who actually come back every week. The broadcast thing is genius — 
-            I send one message and get 30 orders."
+            "Before Quickin, I was getting thousands of TikTok views but could not keep track of a single customer.
+            Now I have a list of 200+ people who actually come back every week. One message can bring 30 orders."
           </blockquote>
           <div className="testimonial-author">
-            <div className="testimonial-avatar">👩‍🍳</div>
+            <div className="testimonial-avatar">AR</div>
             <div>
               <div className="testimonial-name">Aisha R.</div>
               <div className="testimonial-role">Korean Street Food, SS15 Subang Jaya</div>
@@ -104,7 +99,18 @@ export default function SocialProof() {
           text-align: center;
           padding: var(--space-2xl) var(--space-lg);
         }
-        .metric-icon { font-size: 2rem; margin-bottom: var(--space-md); }
+        .metric-icon {
+          width: 2.25rem;
+          height: 2.25rem;
+          margin: 0 auto var(--space-md);
+          border-radius: 999px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(249,115,22,0.12);
+          color: var(--accent-2);
+          font-weight: 800;
+        }
         .metric-value {
           font-family: var(--font-display);
           font-size: 2.5rem;
@@ -161,7 +167,8 @@ export default function SocialProof() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 1.3rem;
+          font-size: 0.95rem;
+          font-weight: 800;
         }
         .testimonial-name {
           font-weight: 700;

@@ -28,6 +28,38 @@ const FLOW_STEPS = [
     screen: 'whatsapp-captured',
     label: 'Customer Captured',
   },
+  {
+    id: 'handoff',
+    screen: 'agent-handoff',
+    label: 'Agent Handoff',
+  },
+]
+
+const AGENT_TRIAD = [
+  {
+    name: 'Aina',
+    role: 'Outreach Specialist',
+    score: 92,
+    summary: 'Qualified the lead -- detected purchase intent, Manglish register',
+    flavor:
+      'Friendly, polite, and culturally fluent. She keeps the first touch warm, never pushy, and bridges Kampung warmth with KL efficiency.',
+  },
+  {
+    name: 'Amir',
+    role: 'Relationship Manager',
+    score: 88,
+    summary: 'Handled objection -- explained pricing, built trust',
+    flavor:
+      'Patient and product-savvy. He answers with reassurance, preserves context, and treats trust like the currency of the informal economy.',
+  },
+  {
+    name: 'Lina',
+    role: 'Closing Specialist',
+    score: 95,
+    summary: 'Closed the deal -- triggered Sovereign Handshake',
+    flavor:
+      'Decisive but respectful. She gets to a clear yes or no, then hands off to compliance only after the tax details are validated.',
+  },
 ]
 
 export default function WhatsAppSimulator() {
@@ -83,7 +115,8 @@ export default function WhatsAppSimulator() {
                 {step === 1 && <WAEntryScreen key="entry" onNext={next} />}
                 {step === 2 && <WAMenuScreen key="menu" onNext={next} />}
                 {step === 3 && <WAOrderScreen key="order" onNext={next} />}
-                {step === 4 && <WACapturedScreen key="cap" />}
+                {step === 4 && <WACapturedScreen key="cap" onNext={next} />}
+                {step === 5 && <AgentHandoffScreen key="handoff" />}
               </AnimatePresence>
             </div>
           </div>
@@ -343,6 +376,110 @@ export default function WhatsAppSimulator() {
         }
         .captured-label { color: var(--text-tertiary); }
         .captured-val { color: var(--text-primary); font-weight: 600; }
+
+        /* Agent Handoff screen */
+        .handoff-shell {
+          padding: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.9rem;
+        }
+        .handoff-note {
+          font-size: 0.78rem;
+          color: var(--text-tertiary);
+          background: rgba(37, 211, 102, 0.06);
+          border: 1px solid rgba(37, 211, 102, 0.14);
+          border-radius: 12px;
+          padding: 0.85rem 0.9rem;
+          line-height: 1.45;
+        }
+        .handoff-grid {
+          display: grid;
+          gap: 0.75rem;
+        }
+        .handoff-card {
+          background: #12222b;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 14px;
+          padding: 0.9rem;
+          color: #e9edef;
+        }
+        .handoff-topline {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 0.75rem;
+          margin-bottom: 0.45rem;
+        }
+        .handoff-name {
+          font-size: 0.98rem;
+          font-weight: 800;
+        }
+        .handoff-role {
+          font-size: 0.72rem;
+          color: #8696a0;
+          margin-top: 0.1rem;
+        }
+        .handoff-score {
+          font-size: 0.8rem;
+          font-weight: 800;
+          color: var(--whatsapp);
+          background: rgba(37, 211, 102, 0.1);
+          padding: 0.25rem 0.55rem;
+          border-radius: 999px;
+          flex-shrink: 0;
+        }
+        .handoff-summary {
+          font-size: 0.82rem;
+          color: #f7fafc;
+          font-weight: 600;
+          margin-bottom: 0.35rem;
+        }
+        .handoff-flavor {
+          font-size: 0.76rem;
+          color: #a9b4ba;
+          line-height: 1.5;
+          margin-bottom: 0.7rem;
+        }
+        .handoff-meter-label {
+          font-size: 0.68rem;
+          color: #8696a0;
+          margin-bottom: 0.25rem;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+        }
+        .handoff-meter-track {
+          width: 100%;
+          height: 8px;
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.08);
+          overflow: hidden;
+        }
+        .handoff-meter-fill {
+          height: 100%;
+          border-radius: inherit;
+          background: linear-gradient(90deg, var(--accent-1), var(--whatsapp));
+        }
+        .handoff-footer {
+          background: rgba(249, 115, 22, 0.08);
+          border: 1px solid rgba(249, 115, 22, 0.18);
+          border-radius: 12px;
+          padding: 0.85rem 0.9rem;
+        }
+        .handoff-footer-title {
+          font-size: 0.78rem;
+          font-weight: 800;
+          color: var(--accent-2);
+          margin-bottom: 0.25rem;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+        }
+        .handoff-footer p {
+          font-size: 0.8rem;
+          color: var(--text-secondary);
+          line-height: 1.5;
+          margin: 0;
+        }
       `}</style>
     </section>
   )
@@ -504,7 +641,7 @@ function WAOrderScreen({ onNext }) {
   )
 }
 
-function WACapturedScreen() {
+function WACapturedScreen({ onNext }) {
   return (
     <motion.div className="sim-screen" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <div className="captured-card">
@@ -544,8 +681,75 @@ function WACapturedScreen() {
       </div>
       <div style={{ padding: '0 1rem 1rem', textAlign: 'center' }}>
         <p style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)', marginBottom: '0.75rem' }}>
-          This took 30 seconds. Without Tapau, this customer would be gone forever.
+          This took 30 seconds. Without Quickin, this customer would be gone forever.
         </p>
+        <button className="btn btn-primary" onClick={onNext}>
+          Continue to Agent Handoff
+        </button>
+      </div>
+    </motion.div>
+  )
+}
+
+function AgentHandoffScreen() {
+  return (
+    <motion.div className="sim-screen" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <div className="wa-sim-header">
+        <div className="wa-sim-avatar">🤝</div>
+        <div>
+          <div className="wa-sim-name">Agent Handoff</div>
+          <div className="wa-sim-status">Replay-only triad trace</div>
+        </div>
+      </div>
+
+      <div className="handoff-shell">
+        <div className="handoff-note">
+          Simulated handoff, architecturally honest. The triad below reflects the real Agent SEA roles and backstory
+          flavor, but no live backend calls are made from this surface.
+        </div>
+
+        <div className="handoff-grid">
+          {AGENT_TRIAD.map((agent, index) => (
+            <motion.div
+              key={agent.name}
+              className="handoff-card"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.15 }}
+            >
+              <div className="handoff-topline">
+                <div>
+                  <div className="handoff-name">{agent.name}</div>
+                  <div className="handoff-role">{agent.role}</div>
+                </div>
+                <div className="handoff-score">{agent.score}%</div>
+              </div>
+
+              <div className="handoff-summary">{agent.summary}</div>
+              <div className="handoff-flavor">{agent.flavor}</div>
+
+              <div className="handoff-meter">
+                <div className="handoff-meter-label">Confidence</div>
+                <div className="handoff-meter-track">
+                  <motion.div
+                    className="handoff-meter-fill"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${agent.score}%` }}
+                    transition={{ duration: 0.8, delay: 0.25 + index * 0.12 }}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="handoff-footer">
+          <div className="handoff-footer-title">Sequence complete</div>
+          <p>
+            Aina qualified the lead in Manglish, Amir handled the objection with patience, and Lina closed the
+            conversation with a compliance-aware handoff. That is the intended operating model behind the demo.
+          </p>
+        </div>
       </div>
     </motion.div>
   )

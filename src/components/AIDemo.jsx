@@ -30,8 +30,8 @@ const PROVIDERS = [
     headers: (key) => ({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${key}`,
-      'HTTP-Referer': 'https://tapau-landing.vercel.app',
-      'X-Title': 'Tapau AI Demo',
+      'HTTP-Referer': 'https://quickin-demo.vercel.app',
+      'X-Title': 'Quickin AI Demo',
     }),
   },
   {

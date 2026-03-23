@@ -5,17 +5,17 @@ export default function ProblemSection() {
   const [ref, isInView] = useInView(0.2)
 
   const steps = [
-    { icon: '📱', label: 'TikTok goes viral', sub: '20k views', color: '#ef4444' },
-    { icon: '👀', label: 'Viewers watch', sub: 'attention captured', color: '#f97316' },
-    { icon: '❓', label: 'Hesitation zone', sub: '"should I order?"', color: '#eab308' },
-    { icon: '💨', label: 'They scroll away', sub: 'customer lost forever', color: '#64748b' },
+    { icon: '1', label: 'TikTok goes viral', sub: '20k views', color: '#ef4444' },
+    { icon: '2', label: 'Viewers watch', sub: 'attention captured', color: '#f97316' },
+    { icon: '3', label: 'Hesitation zone', sub: '"should I order?"', color: '#eab308' },
+    { icon: '4', label: 'They scroll away', sub: 'customer lost forever', color: '#64748b' },
   ]
 
   const afterSteps = [
-    { icon: '📱', label: 'TikTok goes viral', sub: '20k views', color: '#22c55e' },
-    { icon: '🔗', label: '"Reply MENU"', sub: 'engineered CTA', color: '#22c55e' },
-    { icon: '💬', label: 'WhatsApp opens', sub: 'prefilled message', color: '#25D366' },
-    { icon: '🔥', label: 'Customer captured', sub: 'on your list forever', color: '#f97316' },
+    { icon: '1', label: 'TikTok goes viral', sub: '20k views', color: '#22c55e' },
+    { icon: '2', label: 'Reply MENU', sub: 'engineered CTA', color: '#22c55e' },
+    { icon: '3', label: 'WhatsApp opens', sub: 'prefilled message', color: '#25D366' },
+    { icon: '4', label: 'Customer captured', sub: 'on your list forever', color: '#f97316' },
   ]
 
   return (
@@ -28,10 +28,10 @@ export default function ProblemSection() {
           transition={{ duration: 0.6 }}
         >
           <span className="label">The Problem</span>
-          <h2>Attention ≠ Customers</h2>
+          <h2>Attention does not equal customers</h2>
           <p>
-            80,000+ Malaysian F&B businesses go viral on TikTok every month. 
-            Almost none of them capture a single customer's contact from it.
+            Malaysian F&B brands can win attention on social platforms and still fail to capture a single
+            repeatable customer relationship.
           </p>
         </motion.div>
 
@@ -42,7 +42,7 @@ export default function ProblemSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="flow-title" style={{ color: '#ef4444' }}>❌ Without Tapau</h3>
+            <h3 className="flow-title" style={{ color: '#ef4444' }}>Without Quickin</h3>
             <div className="flow-steps">
               {steps.map((step, i) => (
                 <div key={i} className="flow-step">
@@ -70,7 +70,7 @@ export default function ProblemSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h3 className="flow-title" style={{ color: '#22c55e' }}>✅ With Tapau</h3>
+            <h3 className="flow-title" style={{ color: '#22c55e' }}>With Quickin</h3>
             <div className="flow-steps">
               {afterSteps.map((step, i) => (
                 <div key={i} className="flow-step">
@@ -88,7 +88,7 @@ export default function ProblemSection() {
               ))}
             </div>
             <div className="flow-result win">
-              <span className="result-number">50+</span> customers captured in Week 1
+              <span className="result-number">50+</span> customers captured in week 1
             </div>
           </motion.div>
         </div>
@@ -129,7 +129,8 @@ export default function ProblemSection() {
           border-radius: 12px;
           border: 1px solid;
           background: rgba(255,255,255,0.03);
-          font-size: 1.2rem;
+          font-size: 1rem;
+          font-weight: 800;
         }
         .flow-label {
           font-weight: 600;

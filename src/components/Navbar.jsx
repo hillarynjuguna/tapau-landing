@@ -30,7 +30,7 @@ export default function Navbar() {
       <div className="container navbar-inner">
         <a href="/" className="navbar-brand">
           <span className="brand-icon">🥡</span>
-          <span className="brand-text">tapau</span>
+          <span className="brand-text">Quickin</span>
         </a>
         
         <div className="navbar-links">

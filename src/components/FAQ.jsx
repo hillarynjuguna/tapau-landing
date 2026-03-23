@@ -5,31 +5,31 @@ import { useInView } from './useInView'
 const FAQS = [
   {
     q: 'How is this different from just using WhatsApp Business?',
-    a: 'WhatsApp Business gives you a profile. Tapau gives you a system — engineered CTAs that drive clicks, structured entry flows that eliminate customer hesitation, automated data capture, and weekly broadcast templates that bring customers back. The difference is between having a tool and having a retention loop.',
+    a: 'WhatsApp Business gives you a profile. Quickin gives you a system - engineered CTAs that drive clicks, structured entry flows that eliminate customer hesitation, automated data capture, and weekly broadcast templates that bring customers back.',
   },
   {
     q: 'Do I need any technical skills?',
-    a: 'Zero. We handle everything — setup, configuration, link generation, QR codes. Your only job is: tell customers to click the link, reply to WhatsApp normally, and send one broadcast per week (which we can do for you on the Managed plan).',
+    a: 'Zero. We handle setup, configuration, link generation, and QR codes. Your job is to point customers into the thread and keep serving the product well.',
   },
   {
     q: 'What if my customers speak different languages?',
-    a: 'Our AI layer understands Manglish, Malay, Mandarin, Tamil, and English. It classifies customer intent regardless of language and suggests replies in the same register. Your customer writes "boss got ah?" — the system knows they\'re asking about availability.',
+    a: 'Our AI layer understands Manglish, Malay, Mandarin, Tamil, and English. It classifies customer intent regardless of language and suggests replies in the same register.',
   },
   {
     q: 'What happens to my customer data?',
-    a: 'You own it completely. Customer contacts are stored in your own Google Sheet. If you leave Tapau, you keep your entire customer list. We process data on your behalf under PDPA guidelines, but the list belongs to you — always.',
+    a: 'You own it completely. If you leave Quickin, you keep your customer list. We process data on your behalf under PDPA-oriented operating assumptions, but the relationship layer remains yours.',
   },
   {
     q: 'Can this really be set up in 48 hours?',
-    a: 'Yes — provided you complete our pre-onboarding checklist (menu, WhatsApp number, social links). We\'ve designed the system to deploy fast because F&B owners don\'t have time for long implementation cycles. Day 1: system built. Day 2: deployed and trained.',
+    a: 'Yes, provided the onboarding inputs are complete. The system is intentionally designed for fast deployment because small operators do not have time for long implementation cycles.',
   },
   {
     q: 'Will this work for my type of F&B business?',
-    a: 'If your customers find you on social media and you want them to come back, yes. We\'ve designed Tapau for hawker stalls, food trucks, small cafés, home bakers, and any informal F&B business that relies on social media discovery. If you get TikTok views but no repeat customers, this is for you.',
+    a: 'If your customers find you on social media and you want them to come back, yes. Quickin is designed for hawker stalls, food trucks, small cafes, home bakers, and other informal F&B businesses that rely on discovery and repeat demand.',
   },
   {
     q: 'What about e-invoicing and compliance?',
-    a: 'Tapau focuses on the customer layer first — capture and retention. But every order through our system creates structured transaction data. When e-invoicing becomes relevant for your business, the data is already organized. Phase 1: customers. Phase 2: compliance. In that order.',
+    a: 'Quickin starts by owning the customer layer, but every order creates structured transaction data. That means the compliance layer can follow downstream without forcing the merchant to change how they sell.',
   },
 ]
 
@@ -62,7 +62,7 @@ export default function FAQ() {
             >
               <div className="faq-question">
                 <span>{faq.q}</span>
-                <span className="faq-toggle">{open === i ? '−' : '+'}</span>
+                <span className="faq-toggle">{open === i ? '-' : '+'}</span>
               </div>
               <AnimatePresence>
                 {open === i && (

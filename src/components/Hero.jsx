@@ -4,7 +4,6 @@ import './Hero.css'
 export default function Hero() {
   return (
     <section className="hero">
-      {/* Animated gradient orbs */}
       <div className="hero-bg">
         <div className="orb orb-1" />
         <div className="orb orb-2" />
@@ -26,18 +25,14 @@ export default function Hero() {
             transition={{ delay: 0.2 }}
           >
             <span className="badge-dot" />
-            Built for Malaysian F&B — deployed in 48 hours
+            Compliance · Retention · Sovereignty — in one WhatsApp thread
           </motion.div>
 
-          <h1>
-            Your customers find you on TikTok.<br />
-            <span className="gradient-text">Then they disappear.</span>
-          </h1>
+          <h1>The Agentic Growth Engine for Malaysia&apos;s Real Economy</h1>
 
           <p className="hero-subtitle">
-            Tapau turns every viral view into a returning customer — 
-            a WhatsApp-native capture and retention system that gives F&B stalls 
-            the customer infrastructure big brands take for granted.
+            Quickin turns every viral view into a returning customer — a WhatsApp-native capture,
+            compliance, and retention engine for Malaysian F&B and SME businesses.
           </p>
 
           <div className="hero-ctas">
@@ -78,9 +73,9 @@ export default function Hero() {
             <div className="phone-screen">
               <div className="wa-header">
                 <div className="wa-header-left">
-                  <div className="wa-avatar">🥡</div>
+                  <div className="wa-avatar">Q</div>
                   <div>
-                    <div className="wa-name">Tapau • Korean Dogs</div>
+                    <div className="wa-name">Quickin • Korean Dogs</div>
                     <div className="wa-status">online</div>
                   </div>
                 </div>
@@ -92,11 +87,11 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.0 }}
                 >
-                  Hey 👋 Welcome to Korean Dogs!<br /><br />
-                  Today's special:<br />
-                  🌭 Cheese Corn Dog – RM12<br />
-                  🧀 Mozza Pull – RM14<br /><br />
-                  Reply <b>1</b> to order
+                  Hey, welcome to Korean Dogs!<br /><br />
+                  Today&apos;s special:<br />
+                  Cheese Corn Dog - RM12<br />
+                  Mozza Pull - RM14<br /><br />
+                  Reply <b>1</b> to order.
                 </motion.div>
                 <motion.div
                   className="wa-bubble wa-outgoing"
@@ -112,10 +107,10 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 2.8 }}
                 >
-                  Nice 🔥 Reserved for you!<br /><br />
-                  📍 Pickup at SS15 stall<br />
-                  ⏰ Ready by 2:30 PM<br /><br />
-                  Reply with your name 👍
+                  Nice, reserved for you.<br /><br />
+                  Pickup at SS15 stall<br />
+                  Ready by 2:30 PM<br /><br />
+                  Reply with your name.
                 </motion.div>
                 <motion.div
                   className="wa-bubble wa-outgoing"
@@ -123,7 +118,7 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 3.6 }}
                 >
-                  Sarah 😊
+                  Sarah
                 </motion.div>
                 <motion.div
                   className="wa-bubble wa-incoming"
@@ -131,7 +126,7 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 4.2 }}
                 >
-                  ✅ Got it, Sarah! See you at 2:30 PM 🎉
+                  Confirmed, Sarah. See you at 2:30 PM.
                 </motion.div>
               </div>
             </div>

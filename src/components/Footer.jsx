@@ -13,33 +13,33 @@ export default function Footer() {
     e.preventDefault()
     if (!email.trim()) return
     setLoading(true)
-    try {
-      // Web3Forms — free, no backend needed. Replace access_key with yours from web3forms.com
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_KEY || 'YOUR_WEB3FORMS_KEY',
-          subject: '🥡 New Tapau Waitlist Signup',
-          email,
-          message: `New waitlist signup from tapau landing page: ${email}`,
-        }),
-      })
-      const data = await res.json()
-      if (data.success) {
+      try {
+        // Web3Forms — free, no backend needed. Replace access_key with yours from web3forms.com
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: import.meta.env.VITE_WEB3FORMS_KEY || 'YOUR_WEB3FORMS_KEY',
+            subject: '🥡 New Quickin Waitlist Signup',
+            email,
+            message: `New waitlist signup from Quickin landing page: ${email}`,
+          }),
+        })
+        const data = await res.json()
+        if (data.success) {
+          setSubmitted(true)
+        } else {
+          // fallback: open mailto
+          window.location.href = `mailto:hello@agentsea.co?subject=Quickin Waitlist&body=Add me to the waitlist: ${email}`
+          setSubmitted(true)
+        }
+      } catch {
+        // offline fallback
+        window.location.href = `mailto:hello@agentsea.co?subject=Quickin Waitlist&body=Add me to the waitlist: ${email}`
         setSubmitted(true)
-      } else {
-        // fallback: open mailto
-        window.location.href = `mailto:hello@agentsea.co?subject=Tapau Waitlist&body=Add me to the waitlist: ${email}`
-        setSubmitted(true)
+      } finally {
+        setLoading(false)
       }
-    } catch {
-      // offline fallback
-      window.location.href = `mailto:hello@agentsea.co?subject=Tapau Waitlist&body=Add me to the waitlist: ${email}`
-      setSubmitted(true)
-    } finally {
-      setLoading(false)
-    }
   }
 
   return (
@@ -89,10 +89,10 @@ export default function Footer() {
               background: 'linear-gradient(135deg, var(--accent-1), var(--accent-2))',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-            }}>tapau</span>
+            }}>Quickin</span>
           </div>
           <div className="footer-tagline">
-            The missing customer layer for Malaysia's informal economy.
+            The agentic growth engine for Malaysia's real economy.
           </div>
           <div className="footer-links">
             <a href="#problem">Problem</a>
