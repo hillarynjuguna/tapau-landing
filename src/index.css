@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+/* ==========================================
+   TAPAU — Design System
+   "The missing customer layer for Malaysia's informal economy"
+   
+   Color Philosophy: Deep ocean darkness with electric warmth —
+   A nod to Malaysian night market energy meets premium tech.
+   ========================================== */
+
+:root {
+  /* --- Core Palette --- */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #111118;
+  --bg-tertiary: #16161f;
+  --bg-card: rgba(22, 22, 35, 0.6);
+  
+  /* --- Accent Gradient --- */
+  --accent-1: #f97316;   /* Warm orange — like nasi lemak sambal */
+  --accent-2: #fb923c;   /* Lighter orange */
+  --accent-3: #8b5cf6;   /* Electric violet */
+  --accent-4: #06b6d4;   /* Cyan — tech layer */
+  --accent-5: #22d3ee;   /* Bright cyan */
+  
+  /* --- Semantic Colors --- */
+  --success: #22c55e;
+  --warning: #eab308;
+  --error: #ef4444;
+  --whatsapp: #25D366;
+  --whatsapp-dark: #075E54;
+  --whatsapp-light: #dcf8c6;
+  --whatsapp-bg: #0b141a;
+  --whatsapp-chat-bg: #0b141a;
+  
+  /* --- Text --- */
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --text-accent: #fb923c;
+  
+  /* --- Glass --- */
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.08);
+  
+  /* --- Typography --- */
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* --- Spacing Scale --- */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+  
+  /* --- Radii --- */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+  
+  /* --- Shadows --- */
+  --shadow-glow: 0 0 60px rgba(249, 115, 22, 0.15);
+  --shadow-glow-lg: 0 0 120px rgba(249, 115, 22, 0.2);
+  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.3);
+  --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.5);
+  
+  /* --- Layout --- */
+  --max-width: 1200px;
+  --nav-height: 72px;
+}
+
+/* ==========================================
+   Reset & Base
+   ========================================== */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ==========================================
+   Typography
+   ========================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem); font-weight: 800; }
+h2 { font-size: clamp(1.8rem, 3vw + 0.5rem, 3rem); }
+h3 { font-size: clamp(1.3rem, 2vw + 0.3rem, 1.75rem); }
+h4 { font-size: 1.25rem; }
+
+p { color: var(--text-secondary); line-height: 1.7; }
+
+a {
+  color: var(--accent-2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover { color: var(--accent-1); }
+
+/* ==========================================
+   Glass Cards
+   ========================================== */
+
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: var(--space-xl);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: var(--glass-hover);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+/* ==========================================
+   Buttons
+   ========================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: white;
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(249, 115, 22, 0.4);
+  color: white;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: var(--glass-hover);
+  border-color: var(--accent-3);
+  color: var(--accent-5);
+}
+
+.btn-whatsapp {
+  background: var(--whatsapp);
+  color: white;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+  color: white;
+}
+
+/* ==========================================
+   Container
+   ========================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+/* ==========================================
+   Section
+   ========================================== */
+
+.section {
+  padding: var(--space-5xl) 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-4xl);
+}
+
+.section-header .label {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-2);
+  margin-bottom: var(--space-md);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+.section-header h2 {
+  margin-bottom: var(--space-lg);
+}
+
+.section-header p {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+/* ==========================================
+   Animation Utilities
+   ========================================== */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* ==========================================
+   Responsive
+   ========================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --space-4xl: 3rem;
+    --space-5xl: 4rem;
+    --nav-height: 60px;
+  }
+  
+  .container {
+    padding: 0 var(--space-md);
+  }
+  
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: var(--space-3xl) 0;
+  }
+}
+
+/* ==========================================
+   Scrollbar
+   ========================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
