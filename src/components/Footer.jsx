@@ -125,7 +125,7 @@ export default function Footer() {
           </div>
 
           <div className="footer-copy">
-            © 2026 Agent SEA. Built with care in Malaysia 🇲🇾
+            © 2026 Tapau by Agent SEA. Built with care in Malaysia 🇲🇾
           </div>
         </div>
       </div>

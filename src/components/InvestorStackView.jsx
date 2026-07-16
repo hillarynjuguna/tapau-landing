@@ -11,13 +11,13 @@ const LAYERS = [
     summary:
       'The customer-facing layer is the investor demo surface that captures attention, explains the offer, and simulates the WhatsApp journey.',
     details: [
-      'In the local repo, this is the React/Vite landing surface in funnel-landing with the hero, WhatsApp simulator, AI demo, pricing, and investor suite.',
+      'In the local repo, this is the React/Vite landing surface in tapau-landing with the hero, WhatsApp simulator, AI demo, pricing, and investor suite.',
       'It is intentionally replay-based: it shows how Quickin converts social discovery into a structured conversation without pretending to be the backend itself.',
     ],
     sources: [
-      'funnel-landing/src/components/Hero.jsx',
-      'funnel-landing/src/components/WhatsAppSimulator.jsx',
-      'funnel-landing/src/components/AIDemo.jsx',
+      'tapau-landing/src/components/Hero.jsx',
+      'tapau-landing/src/components/WhatsAppSimulator.jsx',
+      'tapau-landing/src/components/AIDemo.jsx',
     ],
   },
   {
